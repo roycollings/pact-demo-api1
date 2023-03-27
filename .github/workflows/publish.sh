@@ -25,8 +25,8 @@ docker run \
   --provider $APPLICATION_NAME \
   --provider-app-version $VERSION \
   --branch $BRANCH \
-  --content-type application/yaml \
+  --content-type application/json \
   --verification-exit-code=0 \
   --verification-results $RESULTS_FILE \
-  --verification-results-content-type application/yaml \
+  --verification-results-content-type application/json \
   --verifier "github-actions"

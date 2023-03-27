@@ -15,12 +15,13 @@ env:
   APPLICATION_NAME: "pact-demo-api1"
   PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-  OAS_FILE: ./oas/openapi.yaml
-  RESULTS_FILE: ./results/report.md
+  OAS_FILE: ./oas/openapi.json
+  RESULTS_FILE: ./results/report.json
   ENVIRONMENT: test
 
 jobs:
   check-oas-file-can-be-deployed:
+    if: github.event.pull_request.merged != true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
