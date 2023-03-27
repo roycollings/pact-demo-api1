@@ -24,10 +24,8 @@ jobs:
     steps:
       # MANDATORY: Must use 'checkout' first
       - uses: actions/checkout@v2
-      - run: ./.github/workflows/publish.sh
-      # - name: Publish provider contract on passing test run
-      #   if: success()
-      #   uses: pactflow/actions/publish-provider-contract@v1.0.1
-      #   env:
-      #     oas_file: $oas_file
-      #     results_file: $results_file
+      - name: Publish provider spec
+        run: ./.github/workflows/publish.sh
+      - name: Check I can deploy to $ENVIRONMENT
+        if: success()
+        run: ./.github/workflows/can-i-deploy.sh
