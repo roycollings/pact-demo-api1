@@ -16,7 +16,7 @@ env:
   PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   OAS_FILE: ./oas/openapi.json
-  RESULTS_FILE: ./results/report.md
+  RESULTS_FILE: ./results/report.json
   ENVIRONMENT: test
 
 jobs:
