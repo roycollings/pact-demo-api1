@@ -17,4 +17,4 @@ docker run \
   broker record-deployment \
   --pacticipant "$APPLICATION_NAME" \
   --version $VERSION \
-  --to-environment $ENVIRONMENT
+  --environment $ENVIRONMENT
