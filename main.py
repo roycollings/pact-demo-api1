@@ -13,7 +13,7 @@ async def read_item(item_id: int) -> GetItemsResponse:
     return {"item_id": item_id}
 
 class SayHelloResponse(BaseModel):
-    messsage: str
+    message: str
 
 @app.get("/")
 async def say_hello() -> SayHelloResponse:
