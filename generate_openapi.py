@@ -3,7 +3,7 @@ from main import app
 import json
 
 
-with open('openapi.json', 'w') as f:
+with open('oas/openapi.json', 'w') as f:
     json.dump(get_openapi(
         title=app.title,
         version=app.version,
