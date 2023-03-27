@@ -1,0 +1,41 @@
+name: "pactflow"
+
+on:
+  push:
+    branches-ignore:
+      - "master"
+
+  pull_request:
+    types:
+      - "closed"
+
+# (This just saves defining these multiple times for different pact jobs)
+env:
+  version: "1.0.0"
+  application_name: "pact-demo-api1"
+  PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  oas_file: ./oas/openapi.yaml
+  results_file: ./results/report.md
+
+jobs:
+  pact-publish-oas-action:
+    runs-on: ubuntu-latest
+    steps:
+      # MANDATORY: Must use 'checkout' first
+      - uses: actions/checkout@v2
+      - name: Publish provider contract on passing test run
+        if: success()
+        uses: pactflow/actions/publish-provider-contract@v1.0.1
+        env:
+          oas_file: $oas_file
+          results_file: $results_file
+      - name: Publish provider contract on failing test run
+        # ensure we publish results even if the tests fail
+        if: failure()
+        uses: pactflow/actions/publish-provider-contract@v1.0.1
+        env:
+          oas_file: $oas_file
+          results_file: $results_file
+          # ensure we set the EXIT_CODE to ensure we upload a failing self-verification result
+          EXIT_CODE: 1
