@@ -14,7 +14,7 @@
                         "required": true,
                         "schema": {
                             "title": "Item Id",
-                            "type": "string"
+                            "type": "integer"
                         },
                         "name": "item_id",
                         "in": "path"
@@ -25,7 +25,9 @@
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetItemsResponse"
+                                }
                             }
                         }
                     },
@@ -51,7 +53,9 @@
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/SayHelloResponse"
+                                }
                             }
                         }
                     }
@@ -61,6 +65,19 @@
     },
     "components": {
         "schemas": {
+            "GetItemsResponse": {
+                "title": "GetItemsResponse",
+                "required": [
+                    "item_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "item_id": {
+                        "title": "Item Id",
+                        "type": "integer"
+                    }
+                }
+            },
             "HTTPValidationError": {
                 "title": "HTTPValidationError",
                 "type": "object",
@@ -71,6 +88,19 @@
                         "items": {
                             "$ref": "#/components/schemas/ValidationError"
                         }
+                    }
+                }
+            },
+            "SayHelloResponse": {
+                "title": "SayHelloResponse",
+                "required": [
+                    "messsage"
+                ],
+                "type": "object",
+                "properties": {
+                    "messsage": {
+                        "title": "Messsage",
+                        "type": "string"
                     }
                 }
             },
