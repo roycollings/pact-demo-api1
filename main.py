@@ -17,7 +17,7 @@ class SayHelloResponse(BaseModel):
 
 @app.get("/")
 async def say_hello() -> SayHelloResponse:
-    return {"message": "hello"}
+    return {"message": 1}
 
 # If you want to generate the swagger file on startup you can do this:
 # @app.on_event("startup")
