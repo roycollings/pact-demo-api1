@@ -20,13 +20,21 @@ env:
   ENVIRONMENT: test
 
 jobs:
-  pact-publish-oas-action:
+  check-oas-file-can-be-deployed:
     runs-on: ubuntu-latest
     steps:
-      # MANDATORY: Must use 'checkout' first
       - uses: actions/checkout@v2
       - name: Publish provider spec
         run: ./.github/workflows/publish.sh
       - name: Check I can deploy
         if: success()
         run: ./.github/workflows/can-i-deploy.sh
+
+  deploy-oas-file:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        if: success()
+        run: ./.github/workflows/deploy.sh
