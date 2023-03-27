@@ -27,6 +27,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Publish provider spec
         run: ./.github/workflows/publish.sh
-      - name: Check I can deploy to $ENVIRONMENT
+      - name: Check I can deploy
         if: success()
         run: ./.github/workflows/can-i-deploy.sh
