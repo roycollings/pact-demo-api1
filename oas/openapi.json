@@ -94,12 +94,12 @@
             "SayHelloResponse": {
                 "title": "SayHelloResponse",
                 "required": [
-                    "messsage"
+                    "message"
                 ],
                 "type": "object",
                 "properties": {
-                    "messsage": {
-                        "title": "Messsage",
+                    "message": {
+                        "title": "Message",
                         "type": "string"
                     }
                 }
