@@ -1,18 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-
-EXIT_CODE=${EXIT_CODE:-0}
-REPORT_FILE_CONTENT_TYPE=${REPORT_FILE_CONTENT_TYPE:-'text/plain'}
-VERIFIER_TOOL=${VERIFIER_TOOL:-'github-actions'}
-BRANCH=${BRANCH}
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo """
 PACT_BROKER_BASE_URL: $PACT_BROKER_BASE_URL
-PACT_BROKER_TOKEN : $PACT_BROKER_TOKEN
-oas_file: $oas_file
-results_file: $results_file
-EXIT_CODE: $EXIT_CODE
+PACT_BROKER_TOKEN: $PACT_BROKER_TOKEN
+APPLICATION_NAME: $APPLICATION_NAME
 BRANCH: $BRANCH
+VERSION: $VERSION
+OAS_FILE: $OAS_FILE
+RESULTS_FILE: $RESULTS_FILE
 """
 
 docker run \
@@ -24,12 +21,12 @@ docker run \
   -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
   pactfoundation/pact-cli:latest \
   pactflow publish-provider-contract \
-  oas/openapi.yaml \
-  --provider pact-demo-api1 \
-  --provider-app-version 1.0.0 \
-  --branch add-github-workflow \
-  --content-type application/json \
+  $OAS_FILE \
+  --provider $APPLICATION_NAME \
+  --provider-app-version $VERSION \
+  --branch $BRANCH \
+  --content-type application/yaml \
   --verification-exit-code=0 \
-  --verification-results result/report.md \
+  --verification-results $RESULTS_FILE \
   --verification-results-content-type application/yaml \
   --verifier "github-actions"
