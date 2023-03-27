@@ -13,11 +13,11 @@ async def read_item(item_id: int) -> GetItemsResponse:
     return {"item_id": item_id}
 
 class SayHelloResponse(BaseModel):
-    message: int
+    message: str
 
 @app.get("/")
 async def say_hello() -> SayHelloResponse:
-    return {"message": 1}
+    return {"message": "hello"}
 
 # If you want to generate the swagger file on startup you can do this:
 # @app.on_event("startup")
