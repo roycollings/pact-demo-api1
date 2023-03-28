@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
+BRANCH=$GITHUB_REF_NAME
 
 echo """
 PACT_BROKER_BASE_URL: $PACT_BROKER_BASE_URL
