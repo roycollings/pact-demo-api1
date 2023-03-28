@@ -6,7 +6,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 class GetItemsResponse(BaseModel):
-    item_id: int
+    item_id_new: int
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: int) -> GetItemsResponse:
